@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meesho Clone</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f3f6;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s;
+    }
+    header {
+      background-color: #fff;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ff3f6c;
+    }
+    .search-container {
+      flex-grow: 1;
+      max-width: 600px;
+      margin: 0 20px;
+    }
+    .search-bar {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .header-icons a {
+      margin-left: 15px;
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+    }
+    .nav-categories {
+      background-color: #fff;
+      padding: 10px 0;
+      border-top: 1px solid #ddd;
+    }
+    .nav-categories ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-categories a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .nav-categories a:hover {
+      color: #ff3f6c;
+    }
+    .banner {
+      background-color: #ff3f6c;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 15px;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .category-filter, .sort-price, .theme-toggle {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .product {
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    .product:hover {
+      transform: scale(1.02);
+    }
+    .product img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 10px 15px;
+    }
+    .product-name {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .price {
+      color: green;
+      font-weight: bold;
+    }
+    .original-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 0.9rem;
+      margin-left: 8px;
+    }
+    .discount {
+      color: #ff3f6c;
+      margin-left: 5px;
+    }
+    .rating {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 5px;
+    }
+    footer {
+      background-color: #fff;
+      padding: 20px;
+      margin-top: 20px;
+      border-top: 1px solid #ddd;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+    }
+    .dark-theme {
+      background-color: #333;
+      color: #fff;
+    }
+    .dark-theme header, .dark-theme .controls, .dark-theme .product, .dark-theme footer {
+      background-color: #444;
+      color: #fff;
+    }
+    .dark-theme .search-bar, .dark-theme .category-filter, .dark-theme .sort-price, .dark-theme .theme-toggle {
+      background-color: #555;
+      color: #fff;
+      border-color: #666;
+    }
+    .dark-theme .nav-categories a, .dark-theme .header-icons a, .dark-theme .footer-links a {
+      color: #fff;
+    }
+    .dark-theme .nav-categories a:hover {
+      color: #ff3f6c;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <div class="logo">Meesho Clone</div>
+      <div class="search-container">
+        <input type="text" class="search-bar" id="searchBar" placeholder="Try Saree, Kurti or Search by Product Code" />
+      </div>
+      <div class="header-icons">
+        <a href="#">Download App</a>
+        <a href="#">Become a Supplier</a>
+        <a href="#">Cart</a>
+        <a href="#">Profile</a>
+      </div>
+    </div>
+    <nav class="nav-categories">
+      <ul>
+        <li><a href="#" data-category="all">All</a></li>
+        <li><a href="#" data-category="clothing">Women Clothing</a></li>
+        <li><a href="#" data-category="accessories">Jewellery & Accessories</a></li>
+        <li><a href="#" data-category="clothing">Men Clothing</a></li>
+        <li><a href="#" data-category="electronics">Electronics</a></li>
+        <li><a href="#" data-category="home">Home & Kitchen</a></li>
+        <li><a href="#" data-category="home">Kids & Baby</a></li>
+        <li><a href="#" data-category="accessories">Beauty & Health</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="banner">Extra 20% off on First Order Only on App</div>
+  <div class="controls">
+    <select class="category-filter" id="categoryFilter">
+      <option value="all">All Categories</option>
+      <option value="home">Home</option>
+      <option value="electronics">Electronics</option>
+      <option value="clothing">Clothing</option>
+      <option value="accessories">Accessories</option>
+    </select>
+    <select class="sort-price" id="sortPrice">
+      <option value="default">Sort by: Default</option>
+      <option value="low-to-high">Price: Low to High</option>
+      <option value="high-to-low">Price: High to Low</option>
+    </select>
+    <button class="theme-toggle" id="themeToggle">Toggle Theme</button>
+  </div>
+  <main class="product-grid" id="productGrid"></main>
+  <footer>
+    <div class="footer-links">
+      <a href="#">Home</a>
+      <a href="#">Categories</a>
+      <a href="#">Mall</a>
+      <a href="#">Help</a>
+      <a href="#">Account</a>
+    </div>
+    <p>Contact us at: <a href="mailto:query@meesho.com">query@meesho.com</a></p>
+  </footer>
+
+  <script>
+    const products = [
+      { id: 1, name: 'Cotton Bedsheet', price: 40, originalPrice: 70, discount: '43% off', rating: '4.3 (150 reviews)', image: './images/cotton_bedsheet.webp.png', category: 'home' },
+      { id: 2, name: 'Bluetooth Speaker', price: 65, originalPrice: 100, discount: '35% off', rating: '4.5 (200 reviews)', image: './images/bluetooth_speaker.webp.png', category: 'electronics' },
+      { id: 3, name: 'Kids Toy Set', price: 30, originalPrice: 50, discount: '40% off', rating: '4.1 (100 reviews)', image: './images/kids_toy.webp.png', category: 'home' },
+      { id: 4, name: 'Wall Clock', price: 25, originalPrice: 40, discount: '38% off', rating: '4.0 (80 reviews)', image: './images/wall_clock.webp.png', category: 'home' },
+      { id: 5, name: 'Running Shoes', price: 120, originalPrice: 160, discount: '25% off', rating: '4.3 (150 reviews)', image: './images/running_shoes.webp.png', category: 'clothing' },
+      { id: 6, name: 'Makeup Kit', price: 70, originalPrice: 100, discount: '30% off', rating: '4.2 (120 reviews)', image: './images/makeup_kit.webp.png', category: 'accessories' },
+      { id: 7, name: 'Wrist Watch', price: 150, originalPrice: 200, discount: '25% off', rating: '4.4 (180 reviews)', image: './images/wrist_watch.webp.png', category: 'accessories' },
+      { id: 8, name: 'Silk Saree', price: 90, originalPrice: 140, discount: '36% off', rating: '4.5 (190 reviews)', image: './images/silk_saree.webp.png', category: 'clothing' },
+      { id: 9, name: 'Casual T-Shirt', price: 35, originalPrice: 60, discount: '42% off', rating: '4.1 (110 reviews)', image: './images/casual_tshirt.webp.png', category: 'clothing' },
+      { id: 10, name: 'Formal Shoes', price: 180, originalPrice: 250, discount: '28% off', rating: '4.0 (95 reviews)', image: './images/formal_shoes.webp.png', category: 'clothing' }
+    ];
+
+    const grid = document.getElementById('productGrid');
+    const searchBar = document.getElementById('searchBar');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const sortPrice = document.getElementById('sortPrice');
+    const themeToggle = document.getElementById('themeToggle');
+    const categoryLinks = document.querySelectorAll('.nav-categories a');
+
+    function displayProducts(filteredProducts) {
+      grid.innerHTML = '';
+      filteredProducts.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'product';
+        productCard.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" />
+          <div class="product-info">
+            <div class="product-name">${product.name}</div>
+            <div>
+              <span class="price">₹${product.price}</span>
+              <span class="original-price">₹${product.originalPrice}</span>
+              <span class="discount">${product.discount}</span>
+            </div>
+            <div class="rating">${product.rating}</div>
+          </div>
+        `;
+        grid.appendChild(productCard);
+      });
+    }
+
+    function filterAndSortProducts() {
+      let filteredProducts = [...products];
+      const searchText = searchBar.value.toLowerCase();
+      const selectedCategory = categoryFilter.value;
+      const sortOption = sortPrice.value;
+
+      // Search filter
+      if (searchText) {
+        filteredProducts = filteredProducts.filter(product =>
+          product.name.toLowerCase().includes(searchText)
+        );
+      }
+
+      // Category filter
+      if (selectedCategory !== 'all') {
+        filteredProducts = filteredProducts.filter(product =>
+          product.category === selectedCategory
+        );
+      }
+
+      // Sort by price
+      if (sortOption === 'low-to-high') {
+        filteredProducts.sort((a, b) => a.price - b.price);
+      } else if (sortOption === 'high-to-low') {
+        filteredProducts.sort((a, b) => b.price - a.price);
+      }
+
+      displayProducts(filteredProducts);
+    }
+
+    searchBar.addEventListener('input', filterAndSortProducts);
+    categoryFilter.addEventListener('change', filterAndSortProducts);
+    sortPrice.addEventListener('change', filterAndSortProducts);
+
+    categoryLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const category = e.target.getAttribute('data-category');
+        categoryFilter.value = category;
+        filterAndSortProducts();
+      });
+    });
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+    });
+
+    displayProducts(products);
+  </script>
+</body>
+</html>
